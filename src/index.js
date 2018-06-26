@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Counter from './Counter';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import registerServiceWorker from './registerServiceWorker';
 
 // init state
 const initialState = {
@@ -42,4 +41,3 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Counter />
 	</Provider>, document.getElementById('root'));
-registerServiceWorker();
