@@ -4,22 +4,15 @@ import { connect } from 'react-redux'
 class Counter extends React.Component {
 
   onIncrement = () => {
-    this.props.dispatch({
-      type: 'INCREMENT'
-    })
+    this.props.onIncrement()
   }
 
-  onDecrement = () => {
-    this.props.dispatch({
-      type: 'DECREMENT'
-    })
+  onDecrement() {
+    this.props.onDecrement()
   }
 
   onChange = (e) => {
-    this.props.dispatch({
-      type: 'ONCHANGE',
-      text: e.target.value
-    })
+    this.props.onChange(e.target.value)
   }
 
   render() {
@@ -30,7 +23,7 @@ class Counter extends React.Component {
           Age:
           <button onClick={this.onIncrement}>+</button>
           {this.props.count}
-          <button onClick={this.onDecrement}>-</button><br /><br />
+          <button onClick={this.onDecrement.bind(this)}>-</button><br /><br />
         </div>
         <div>
           name:
@@ -50,5 +43,26 @@ function mapStateToProps(state) {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    onIncrement: () => {
+      dispatch({
+        type: 'INCREMENT'
+      })
+    },
+    onDecrement: () => {
+      dispatch({
+        type: 'DECREMENT'
+      })
+    },
+    onChange: (name) => {
+      dispatch({
+        type: 'ONCHANGE',
+        name
+      })
+    }
+  }
+}
+
 // connect Redux store to Counter
-export default connect(mapStateToProps)(Counter)
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)

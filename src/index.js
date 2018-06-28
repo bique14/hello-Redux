@@ -26,7 +26,7 @@ function reducer(state = initialState, action) {
 		case 'ONCHANGE':
 			return {
 				...state,
-				name: action.text,
+				name: action.name,
 			}
 		default:
 			return state
@@ -34,7 +34,10 @@ function reducer(state = initialState, action) {
 }
 
 // create store
-const store = createStore(reducer)
+const store = createStore(
+	reducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
 	// Provider: manage store in all app
