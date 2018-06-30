@@ -1,7 +1,16 @@
+// @flow
 import React from 'react'
 import { connect } from 'react-redux'
 
-class Counter extends React.Component {
+type Props = {
+  onIncrement: () => void,
+  onDecrement: () => void,
+  onChange: (string) => void,
+  count: number,
+  name: string,
+}
+
+class Counter extends React.Component<Props> {
 
   onIncrement = () => {
     this.props.onIncrement()
