@@ -1,4 +1,9 @@
 # Playground with React-redux
+
+## Docker
+```
+docker pull bique14/hello-redux
+```
 ---
 
 ###### initial state
