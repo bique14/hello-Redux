@@ -39,8 +39,15 @@ const store = createStore(
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+const action = type => store.dispatch({type})
+const change = (type, name) => store.dispatch({type, name})
+
 ReactDOM.render(
 	// Provider: manage store in all app
 	<Provider store={store}>
-		<Counter />
+		<Counter 
+      onIncrement={() => action('INCREMENT')}
+      onDecrement={() => action('DECREMENT')}
+      onChange={(e) => change('ONCHANGE', e)}
+    />
 	</Provider>, document.getElementById('root'));

@@ -10,33 +10,26 @@ type Props = {
   name: string,
 }
 
+type State = {
+  count: number,
+  name: string,
+}
+
 class Counter extends React.Component<Props> {
-
-  onIncrement = () => {
-    this.props.onIncrement()
-  }
-
-  onDecrement() {
-    this.props.onDecrement()
-  }
-
-  onChange = (e) => {
-    this.props.onChange(e.target.value)
-  }
-
   render() {
+    const { onIncrement, onDecrement, onChange } = this.props
     return (
       <div>
         <h1>Redux example : counter and onchange</h1>
         <div>
           Age:
-          <button onClick={this.onIncrement}>+</button>
+          <button onClick={onIncrement}>+</button>
           {this.props.count}
-          <button onClick={this.onDecrement.bind(this)}>-</button><br /><br />
+          <button onClick={onDecrement}>-</button><br /><br />
         </div>
         <div>
           name:
-          <input type='text' onChange={this.onChange}/>
+          <input type='text' onChange={(e: SyntheticEvent<HTMLInputElement>)=> onChange(e.currentTarget.value)} />
           <h3>{this.props.name}</h3>
         </div>
       </div>
@@ -45,31 +38,16 @@ class Counter extends React.Component<Props> {
 }
 
 // transforms the Redux state into an object containing props.
-function mapStateToProps(state) {
+function mapStateToProps(state: State) {
   return {
     count: state.count,
     name: state.name,
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Function) {
   return {
-    onIncrement: () => {
-      dispatch({
-        type: 'INCREMENT'
-      })
-    },
-    onDecrement: () => {
-      dispatch({
-        type: 'DECREMENT'
-      })
-    },
-    onChange: (name) => {
-      dispatch({
-        type: 'ONCHANGE',
-        name
-      })
-    }
+
   }
 }
 
